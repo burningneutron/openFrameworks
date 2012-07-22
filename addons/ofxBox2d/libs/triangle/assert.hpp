@@ -1,3 +1,4 @@
+#include <assert.h>
 
 namespace tpp {
 
@@ -18,7 +19,8 @@ extern bool MyAssertFunction( bool b, char* desc, int line, char* file);
 
 
 #if defined( _DEBUG )
-#define Assert( exp, description ) MyAssertFunction( (int)(exp), description, __LINE__, __FILE__ )
+//#define Assert( exp, description ) MyAssertFunction( (int)(exp), description, __LINE__, __FILE__ )
+#define Assert( exp, description ) assert(exp && description)
 #else
 #define Assert( exp, description )
 #endif
