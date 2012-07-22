@@ -18,6 +18,8 @@ ofxAndroid/ofAndroidLib/gen
 !ofxAssimpModelLoader
 !ofxGui
 !ofxBox2d
+!ofxDelaunay
+!ofxParticleEmitter
 
 # don't ignore the .gitignore file
 !.gitignore
