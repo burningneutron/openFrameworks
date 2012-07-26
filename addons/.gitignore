@@ -20,6 +20,9 @@ ofxAndroid/ofAndroidLib/gen
 !ofxBox2d
 !ofxDelaunay
 !ofxParticleEmitter
+!ofxSoso
+!ofxAnimatable
+!ofxTween
 
 # don't ignore the .gitignore file
 !.gitignore
