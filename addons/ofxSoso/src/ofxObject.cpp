@@ -286,11 +286,11 @@ void ofxObject::draw(ofxObjectMaterial *iMaterial, float *iMatrix, int iSelect, 
 			predraw();
 
 			if ((iSelect == OF_RENDER_TRANSPARENT) && !hasTransparency()) {
-				//Don't render — Transparent render pass, but this object is opaque 
+				//Don't render ?Transparent render pass, but this object is opaque 
 			}else if ((iSelect == OF_RENDER_OPAQUE) && hasTransparency()) {
-				//Don't render — Opaque render pass, but this object is transparent
+				//Don't render ?Opaque render pass, but this object is transparent
 			}else if ((iSelect != OF_RENDER_ONTOP) && renderOntop) {
-				//Don't render — Regular pass, but this is an on top object				
+				//Don't render ?Regular pass, but this is an on top object				
 			}else {
 				//Render!  
 				render();		
@@ -304,7 +304,7 @@ void ofxObject::draw(ofxObjectMaterial *iMaterial, float *iMatrix, int iSelect, 
 			postdraw();
 		}
 		else{
-			//iDrawAlone is true — just draw this object (no children)
+			//iDrawAlone is true ?just draw this object (no children)
 			//PEND idle of children won't get called for these objects! live with it or fix it 
 			//v4.0 (moving children draw loop above might have fixed it)
 			predraw();
@@ -374,7 +374,7 @@ int ofxObject::collectNodes(int iSelect, ofxObject *iNodes[], int iNumber, int i
 	int curNode = iNumber;
 
 	if (iNumber >= iMax) {
-		printf("ofxObject::collectNodes() — cannot render more than %d objects.\n", iMax); 
+		printf("ofxObject::collectNodes() ?cannot render more than %d objects.\n", iMax); 
 		return curNode;
 	}
 
@@ -384,10 +384,10 @@ int ofxObject::collectNodes(int iSelect, ofxObject *iNodes[], int iNumber, int i
 
 	if (shown) {
 		if ((iSelect == OF_RENDER_TRANSPARENT) && !hasTransparency()) {
-			// Skip it — looking for transparent objects, but this one is opaque
+			// Skip it ?looking for transparent objects, but this one is opaque
 		}
 		else if	((iSelect == OF_RENDER_OPAQUE) && hasTransparency()) {
-			// Skip it — looking for opaque objects, but this one is transparent
+			// Skip it ?looking for opaque objects, but this one is transparent
 		}		
 		else if ((iSelect == OF_RENDER_ONTOP) && (!renderOntop)) {					
 			// Skip it - looking for on-top objects, but this is regular

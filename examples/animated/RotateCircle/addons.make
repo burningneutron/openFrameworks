@@ -1,0 +1,4 @@
+ofxOsc
+ofxParticleEmitter
+ofxSoso
+ofxXmlSettings

@@ -23,6 +23,7 @@ ofxAndroid/ofAndroidLib/gen
 !ofxSoso
 !ofxAnimatable
 !ofxTween
+!ofxSimpleNI
 
 # don't ignore the .gitignore file
 !.gitignore
