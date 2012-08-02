@@ -3,11 +3,12 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-	camWidth 		= 320;	// try to grab at this size. 
-	camHeight 		= 240;
+	camWidth 		= 1280;	// try to grab at this size. 
+	camHeight 		= 720;
 	
 	vidGrabber.setVerbose(true);
 	vidGrabber.initGrabber(camWidth,camHeight);
+	vidGrabber.setDesiredFrameRate(15);
 	
 	videoInverted 	= new unsigned char[camWidth*camHeight*3];
 	videoTexture.allocate(camWidth,camHeight, GL_RGB);	
@@ -37,6 +38,10 @@ void testApp::draw(){
 	ofSetHexColor(0xffffff);
 	vidGrabber.draw(20,20);
 	videoTexture.draw(20+camWidth,20,camWidth,camHeight);
+
+	string str = "framerate is ";                       
+	str += ofToString(ofGetFrameRate(), 2)+"fps"; 
+	ofSetWindowTitle(str);
 }
 
 

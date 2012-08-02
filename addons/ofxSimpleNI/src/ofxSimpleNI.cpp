@@ -33,6 +33,8 @@ ofxSimpleNI::ofxSimpleNI()
 	verdana14.loadFont("openni\\font\\verdana.ttf", 14, true, true);
 	verdana14.setLineHeight(18.0f);
 	verdana14.setLetterSpacing(1.037);
+
+	isNormalizeDepth = false;
 }
 
 ofxSimpleNI::~ofxSimpleNI()
@@ -186,26 +188,26 @@ void ofxSimpleNI::update()
 		}
 	}
 
-	for(int y = 0; y < g_depthMD.YRes(); y++){
+	for(int y = 0; y < depthImgHeight; y++){
 		const XnDepthPixel *rawDepth = g_depthMD.Data() + g_depthMD.XRes() * y;
 		unsigned char *scaledDepth = depthImg.getPixels() + (int)depthImg.getWidth() * y;
-		int ZRes = g_depthMD.ZRes();
-		for(int x = 0; x < g_depthMD.XRes(); x++){
-			//*scaledDepth++ = *rawDepth * 255 / ZRes;
-			//*scaledDepth++ = *rawDepth * 255 / ZRes;
-			//*scaledDepth++ = *rawDepth * 255 / ZRes;
-			//rawDepth++;
-			if (*rawDepth != 0)
-			{
-				int nHistValue = g_pDepthHist[*rawDepth];
-				*scaledDepth++ = nHistValue;
+		for(int x = 0; x < depthImgWidth; x++){
+			if(!isNormalizeDepth){
+				*scaledDepth++ = *rawDepth * 255 / g_nZRes;
+				rawDepth++;
 			}else{
-				*scaledDepth++ = 0;
+				if (*rawDepth != 0)
+				{
+					int nHistValue = g_pDepthHist[*rawDepth];
+					*scaledDepth++ = nHistValue;
+				}else{
+					*scaledDepth++ = 0;
+				}
+				rawDepth++;
 			}
-			rawDepth++;
-
 		}
 	}
+	depthImg.update();
 
 	rawdepthImg.setFromPixels(g_depthMD.Data(), g_depthMD.XRes(), g_depthMD.YRes(), OF_IMAGE_GRAYSCALE);
 	colorImg.setFromPixels(g_imageMD.Data(), g_imageMD.XRes(), g_imageMD.YRes(), OF_IMAGE_COLOR);

@@ -80,6 +80,8 @@ public:
 
 	ofTrueTypeFont	verdana14;
 
+	bool isNormalizeDepth;
+
 private:
 	const XnChar* GetCalibrationErrorString(XnCalibrationStatus error);
 	const XnChar* GetPoseErrorString(XnPoseDetectionStatus error);
