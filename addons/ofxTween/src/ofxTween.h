@@ -31,8 +31,8 @@ class ofxTween{
 
 		float getTarget(unsigned pos);
 
-		uint getDuration();
-		void setDuration(uint duration);
+		unsigned getDuration();
+		void setDuration(unsigned duration);
 
 		bool isRunning();
 		bool isDelaying(){ return timestamp.elapsed()<0; }
