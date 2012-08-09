@@ -13,6 +13,7 @@
 #include "ofxAnimatorAlpha.h"
 #include "ofxAnimatorScale.h"
 #include "ofxAnimatorTranslation.h"
+#include "ofxAnimatorRotation.h"
 #include "ofxAnimatorShowHide.h"
 
 #endif

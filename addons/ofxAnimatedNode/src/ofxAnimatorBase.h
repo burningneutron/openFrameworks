@@ -19,7 +19,7 @@ public:
 		Expo,
 		Quad,
 		Quint,
-		sine
+		Sine
 	};
 
 	enum EasingType{
@@ -28,7 +28,7 @@ public:
 		EaseInOut
 	};
 
-	ofxAnimatorBase(ofxAnimatedNodeBase& _animatedNode): animatedNode(_animatedNode)
+	ofxAnimatorBase()
 	{
 
 	}
@@ -38,9 +38,17 @@ public:
 
 	}
 
+	void bind( ofxAnimatedNodeBase *_animatedNode)
+	{
+		animatedNode = _animatedNode;
+	}
+
+	virtual void start() = 0;
+	virtual void stop() = 0;
 	virtual void update() = 0;
+	virtual bool isFinish() = 0;
 protected:
-	ofxAnimatedNodeBase& animatedNode;
+	ofxAnimatedNodeBase* animatedNode;
 
 };
 

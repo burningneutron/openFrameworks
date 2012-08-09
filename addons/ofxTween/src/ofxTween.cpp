@@ -58,7 +58,6 @@ void ofxTween::setParameters(int _id,  ofxEasing & _easing, ofxEasingType _type,
 
 	completed = false;
 	running = true;
-
 }
 
 void ofxTween::addValue(float _from, float _to){
@@ -75,6 +74,7 @@ void ofxTween::start(){
 	}else{
 		elapsed=0;
 	}
+
 }
 
 void ofxTween::setDuration(unsigned _duration) {

@@ -12,16 +12,26 @@ class ofxTween;
 class ofxAnimatorColor: public ofxAnimatorBase
 {
 public:
-	ofxAnimatorColor(ofxAnimatedNodeBase &_animatedNode);
+	ofxAnimatorColor();
+	ofxAnimatorColor(ofxAnimatorBase::EasingFuncType _easyFuncType, ofxAnimatorBase::EasingType _easyType, ofColor _to, float _duration, float _delay);
 
 	~ofxAnimatorColor();
 
-	void set(ofxAnimatorBase::EasingFuncType _easyFuncType, ofxAnimatorBase::EasingType easyType, ofColor to, float duration, float delay);
+	void set(ofxAnimatorBase::EasingFuncType _easyFuncType, ofxAnimatorBase::EasingType _easyType, ofColor _to, float _duration, float _delay);
 
+	void start();
+	void stop();
 	void update();
+
+	 bool isFinish();
 
 private:
 	ofxTween *tween;
 	ofxEasing *easyFunc;
+	ofxAnimatorBase::EasingType easyType;
+	ofColor to;
+	float duration;
+	float delay;
+
 };
 #endif

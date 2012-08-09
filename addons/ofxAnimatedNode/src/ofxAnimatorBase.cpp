@@ -46,7 +46,7 @@ ofxEasing& getEasingFunc(ofxAnimatorBase::EasingFuncType type)
 	case ofxAnimatorBase::Quint:
 		return easingquint;
 		break;
-	case ofxAnimatorBase::sine:
+	case ofxAnimatorBase::Sine:
 		return easingsine;
 		break;
 	default:

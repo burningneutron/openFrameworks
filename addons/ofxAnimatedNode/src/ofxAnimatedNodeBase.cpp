@@ -37,6 +37,16 @@ void ofxAnimatedNodeBase::setTranslation( ofVec3f _translation )
 	translation = _translation;
 }
 
+ofVec3f ofxAnimatedNodeBase::getRotation() const
+{
+	return rotation;
+}
+
+void ofxAnimatedNodeBase::setRotation( ofVec3f _rotation )
+{
+	rotation = _rotation;
+}
+
 float ofxAnimatedNodeBase::getAlpha() const
 {
 	return alpha;
@@ -84,7 +94,11 @@ void ofxAnimatedNodeBase::preDraw()
 	ofSetColor(color);
 	ofPushMatrix();
 	ofTranslate(translation[0], translation[1], translation[2]);
+	ofRotate(rotation[2], 0, 0, 1);
+	ofRotate(rotation[1], 0, 1, 0);
+	ofRotate(rotation[0], 1, 0, 0);
 	
+
 }
 
 void ofxAnimatedNodeBase::draw()
@@ -103,5 +117,7 @@ void ofxAnimatedNodeBase::postDraw()
 
 void ofxAnimatedNodeBase::bindAnimator(ofxAnimatorBase* _animator)
 {
+	_animator->bind(this);
+	_animator->start();
 	animators.push_back(_animator);
 }

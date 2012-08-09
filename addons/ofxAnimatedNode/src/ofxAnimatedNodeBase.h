@@ -17,6 +17,9 @@ public:
 	ofVec3f getTranslation() const;
 	void setTranslation( ofVec3f _translation );
 
+	ofVec3f getRotation() const;
+	void setRotation( ofVec3f _translation );
+
 	float getAlpha() const;
 	void setAlpha( float _alpha );
 
@@ -39,6 +42,7 @@ public:
 private:
 	ofColor color;
 	ofVec3f translation;
+	ofVec3f rotation;
 	float alpha;
 	float scale;
 	bool show;
