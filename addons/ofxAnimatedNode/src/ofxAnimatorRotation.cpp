@@ -52,3 +52,8 @@ void ofxAnimatorRotation::update()
 	newRotation[2] = tween->getTarget(2);
 	animatedNode->setRotation(newRotation);
 }
+
+bool ofxAnimatorRotation::isFinish()
+{
+	return tween->isCompleted();
+}

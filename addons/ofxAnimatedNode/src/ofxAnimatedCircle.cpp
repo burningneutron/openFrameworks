@@ -1,7 +1,7 @@
 #include "ofxAnimatedNodeBase.h"
 #include "ofxAnimatedCircle.h"
 
-ofxAnimatedCircle::ofxAnimatedCircle()
+ofxAnimatedCircle::ofxAnimatedCircle(): ofxAnimatedNodeBase()
 {
 	set(0, 0, 0);
 }

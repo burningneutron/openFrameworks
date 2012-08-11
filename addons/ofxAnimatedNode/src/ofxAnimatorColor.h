@@ -23,7 +23,7 @@ public:
 	void stop();
 	void update();
 
-	 bool isFinish();
+	bool isFinish();
 
 private:
 	ofxTween *tween;

@@ -48,3 +48,8 @@ void ofxAnimatorScale::update()
 {
 	animatedNode->setScale(tween->update());
 }
+
+bool ofxAnimatorScale::isFinish()
+{
+	return tween->isCompleted();
+}

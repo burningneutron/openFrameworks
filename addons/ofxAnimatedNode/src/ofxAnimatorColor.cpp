@@ -54,3 +54,8 @@ void ofxAnimatorColor::update()
 	newColor[3] = tween->getTarget(3);
 	animatedNode->setColor(newColor);
 }
+
+bool ofxAnimatorColor::isFinish()
+{
+	return tween->isCompleted();
+}

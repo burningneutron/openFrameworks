@@ -3,7 +3,7 @@
 
 ofxAnimatedNodeBase::ofxAnimatedNodeBase()
 {
-	color = ofColor(0,0,0);
+	color = ofColor(255,255,255);
 	alpha = 1.f;
 	translation = ofVec3f(0.f, 0.f, 0.f);
 	scale = 1.f;
