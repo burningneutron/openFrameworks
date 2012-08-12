@@ -18,10 +18,15 @@ public:
 
 	void play();
 	void stop();
+
+	float getWidth();
+	float getHeight();
 	void setSpeed(float speed);
 	void setLoopState(ofLoopType mode);
+	void setCentered(bool _isCentered);
 
 private:
 	ofVideoPlayer video;
+	bool isCentered;
 };
 #endif

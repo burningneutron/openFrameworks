@@ -3,11 +3,12 @@
 
 ofAnimatedVideoPlayer::ofAnimatedVideoPlayer(): ofxAnimatedNodeBase()
 {
-
+	isCentered = false;
 }
 
 ofAnimatedVideoPlayer::ofAnimatedVideoPlayer(string filename)
 {
+	isCentered = false;
 	set(filename);
 }
 
@@ -43,6 +44,16 @@ void ofAnimatedVideoPlayer::stop()
 	video.stop();
 }
 
+float ofAnimatedVideoPlayer::getWidth()
+{
+	return video.getWidth();
+}
+
+float ofAnimatedVideoPlayer::getHeight()
+{
+	return video.getHeight();
+}
+
 void ofAnimatedVideoPlayer::setSpeed(float speed)
 {
 	video.setSpeed(speed);
@@ -51,4 +62,9 @@ void ofAnimatedVideoPlayer::setSpeed(float speed)
 void ofAnimatedVideoPlayer::setLoopState(ofLoopType mode)
 {
 	video.setLoopState(mode);
+}
+
+void ofAnimatedVideoPlayer::setCentered(bool _isCentered)
+{
+	isCentered = _isCentered;
 }

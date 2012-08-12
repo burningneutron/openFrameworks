@@ -25,6 +25,7 @@ ofxAndroid/ofAndroidLib/gen
 !ofxTween
 !ofxSimpleNI
 !ofxAnimatedNode
+!ofxVideoPlayerPlus
 
 # don't ignore the .gitignore file
 !.gitignore

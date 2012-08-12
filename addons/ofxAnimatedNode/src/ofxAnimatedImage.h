@@ -15,7 +15,12 @@ public:
 	void set(string filename);
 	void render();
 
+	float getWidth();
+	float getHeight();
+	void setCentered(bool _isCentered);
+
 private:
 	ofImage img;
+	bool isCentered;
 };
 #endif

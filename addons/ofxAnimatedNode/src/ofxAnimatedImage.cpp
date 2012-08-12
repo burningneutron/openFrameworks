@@ -3,11 +3,12 @@
 
 ofxAnimatedImage::ofxAnimatedImage(): ofxAnimatedNodeBase()
 {
-
+	isCentered = false;
 }
 
 ofxAnimatedImage::ofxAnimatedImage(string filename)
 {
+	isCentered = false;
 	set(filename);
 }
 
@@ -23,5 +24,26 @@ void ofxAnimatedImage::set(string filename)
 
 void ofxAnimatedImage::render()
 {
-	img.draw(0,0);
+	ofEnableAlphaBlending();
+	if( isCentered){
+		img.draw(-img.getWidth()/2, -img.getHeight()/2);
+	}else{
+		img.draw(0,0);
+	}
+	ofDisableAlphaBlending();
+}
+
+float ofxAnimatedImage::getWidth()
+{
+	return img.getWidth();
+}
+
+float ofxAnimatedImage::getHeight()
+{
+	return img.getHeight();
+}
+
+void ofxAnimatedImage::setCentered(bool _isCentered)
+{
+	isCentered = _isCentered;
 }
