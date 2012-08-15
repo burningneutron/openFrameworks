@@ -1,70 +1,108 @@
+#include <assert.h>
 #include "ofxAnimatedNodeBase.h"
 #include "ofxAnimatedVideoPlayer.h"
 
-ofAnimatedVideoPlayer::ofAnimatedVideoPlayer(): ofxAnimatedNodeBase()
+ofxAnimatedVideoPlayer::ofxAnimatedVideoPlayer(int _type): ofxAnimatedNodeBase()
 {
 	isCentered = false;
+	type = _type;
+	createVideoPlayer();
 }
 
-ofAnimatedVideoPlayer::ofAnimatedVideoPlayer(string filename)
+ofxAnimatedVideoPlayer::ofxAnimatedVideoPlayer(string filename, int _type)
 {
 	isCentered = false;
+	type = _type;
+	createVideoPlayer();
 	set(filename);
 }
 
-ofAnimatedVideoPlayer::~ofAnimatedVideoPlayer()
+void ofxAnimatedVideoPlayer::createVideoPlayer()
 {
-
+	if( type == VIDEO_PLAYER_QT ){
+		video = new ofVideoPlayer;
+	}else{
+		assert(0);
+	}
 }
 
-void ofAnimatedVideoPlayer::set(string filename)
+ofxAnimatedVideoPlayer::~ofxAnimatedVideoPlayer()
 {
-	video.loadMovie(filename);
+	if( video ) delete video;
 }
 
-void ofAnimatedVideoPlayer::update()
+void ofxAnimatedVideoPlayer::set(string filename, int type)
+{	
+	video->loadMovie(filename);
+}
+
+void ofxAnimatedVideoPlayer::update()
 {
-	video.idleMovie();
+	video->update();
 
 	ofxAnimatedNodeBase::update();
 }
 
-void ofAnimatedVideoPlayer::render()
+void ofxAnimatedVideoPlayer::render()
 {
-	video.draw(0,0);
+	if( type == VIDEO_PLAYER_QT){
+		dynamic_cast<ofVideoPlayer*>(video)->draw(0,0);
+	}else{
+		assert(0);
+	}
 }
 
-void ofAnimatedVideoPlayer::play()
+void ofxAnimatedVideoPlayer::play()
 {
-	video.play();
+	video->play();
 }
 
-void ofAnimatedVideoPlayer::stop()
+void ofxAnimatedVideoPlayer::stop()
 {
-	video.stop();
+	video->stop();
 }
 
-float ofAnimatedVideoPlayer::getWidth()
+float ofxAnimatedVideoPlayer::getWidth()
 {
-	return video.getWidth();
+	return video->getWidth();
 }
 
-float ofAnimatedVideoPlayer::getHeight()
+float ofxAnimatedVideoPlayer::getHeight()
 {
-	return video.getHeight();
+	return video->getHeight();
 }
 
-void ofAnimatedVideoPlayer::setSpeed(float speed)
+void ofxAnimatedVideoPlayer::setSpeed(float speed)
 {
-	video.setSpeed(speed);
+	video->setSpeed(speed);
 }
 
-void ofAnimatedVideoPlayer::setLoopState(ofLoopType mode)
+void ofxAnimatedVideoPlayer::setLoopState(ofLoopType mode)
 {
-	video.setLoopState(mode);
+	video->setLoopState(mode);
 }
 
-void ofAnimatedVideoPlayer::setCentered(bool _isCentered)
+void ofxAnimatedVideoPlayer::setCentered(bool _isCentered)
 {
 	isCentered = _isCentered;
+}
+
+void ofxAnimatedVideoPlayer::setFrame(int frame)
+{
+	video->setFrame(frame);
+}
+
+bool ofxAnimatedVideoPlayer::isPaused()
+{
+	return video->isPaused();
+}
+
+bool ofxAnimatedVideoPlayer::isLoaded()
+{
+	return video->isLoaded();
+}
+
+bool ofxAnimatedVideoPlayer::isPlaying()
+{
+	return video->isPlaying();
 }

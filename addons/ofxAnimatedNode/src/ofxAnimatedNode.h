@@ -15,5 +15,6 @@
 #include "ofxAnimatorTranslation.h"
 #include "ofxAnimatorRotation.h"
 #include "ofxAnimatorShowHide.h"
+#include "ofxAnimatorVideoPlayerSwitch.h"
 
 #endif

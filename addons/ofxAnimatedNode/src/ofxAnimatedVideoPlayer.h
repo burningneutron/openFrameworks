@@ -5,14 +5,17 @@
 
 class ofxAnimatedNodeBase;
 
-class ofAnimatedVideoPlayer: public ofxAnimatedNodeBase
+#define VIDEO_PLAYER_QT  0
+#define VIDEO_PLAYER_GST 1
+
+class ofxAnimatedVideoPlayer: public ofxAnimatedNodeBase
 {
 public:
-	ofAnimatedVideoPlayer();
-	ofAnimatedVideoPlayer(string filename);
-	~ofAnimatedVideoPlayer();
+	ofxAnimatedVideoPlayer(int type = VIDEO_PLAYER_QT);
+	ofxAnimatedVideoPlayer(string filename, int type = VIDEO_PLAYER_QT);
+	~ofxAnimatedVideoPlayer();
 
-	void set(string filename);
+	void set(string filename, int type = VIDEO_PLAYER_QT);
 	void update();
 	void render();
 
@@ -25,8 +28,18 @@ public:
 	void setLoopState(ofLoopType mode);
 	void setCentered(bool _isCentered);
 
+	void setFrame(int frame);  // frame 0 = first frame...
+
+	bool isPaused();
+	bool isLoaded();
+	bool isPlaying();
+
 private:
-	ofVideoPlayer video;
+	ofBaseVideoPlayer *video;
 	bool isCentered;
+
+	int type;
+
+	void createVideoPlayer();
 };
 #endif
