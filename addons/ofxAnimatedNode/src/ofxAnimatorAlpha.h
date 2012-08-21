@@ -19,6 +19,8 @@ public:
 	void stop();
 	void update();
 
+	bool isFinish();
+
 private:
 	ofxTween *tween;
 	ofxEasing *easyFunc;

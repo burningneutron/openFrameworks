@@ -46,3 +46,8 @@ void ofxAnimatorAlpha::update()
 {
 	animatedNode->setAlpha(tween->update());
 }
+
+bool ofxAnimatorAlpha::isFinish()
+{
+	return tween->isCompleted();
+}

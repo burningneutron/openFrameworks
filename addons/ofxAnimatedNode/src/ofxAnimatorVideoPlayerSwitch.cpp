@@ -46,14 +46,11 @@ void ofxAnimatorVideoPlayerSwitch::stop()
 void ofxAnimatorVideoPlayerSwitch::update()
 {
 	tween->update();
-	cout << "switch here" << endl;
 	if( tween->isCompleted() && isFirstTime ){
 		if( to ) dynamic_cast<ofxAnimatedVideoPlayer*>(animatedNode)->play();
 		else dynamic_cast<ofxAnimatedVideoPlayer*>(animatedNode)->stop();
 
 		isFirstTime = false;
-
-		cout << "switch here" << endl;
 	}
 }
 

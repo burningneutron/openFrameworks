@@ -1,6 +1,10 @@
 #include "ofxAnimatedNode.h"
 #include "ofxAnimatorBase.h"
 
+#include <deque>
+
+using namespace std;
+
 ofxAnimatedNodeBase::ofxAnimatedNodeBase()
 {
 	color = ofColor(255,255,255);
@@ -84,13 +88,16 @@ void ofxAnimatedNodeBase::setHide()
 
 void ofxAnimatedNodeBase::update()
 {
-	for( int i = 0; i < (int) animators.size(); i++ ){
-		animators[i]->update();
+	for( deque<ofxAnimatorBase*>::iterator it = animators.begin(); it != animators.end(); ){
+		(*it)->update();
+		if( (*it)->isFinish() ) it = animators.erase(it);
+		else it++;
 	}
 }
 
 void ofxAnimatedNodeBase::preDraw()
 {
+	ofEnableAlphaBlending();
 	ofSetColor(color, alpha*255);
 	ofPushMatrix();
 	ofTranslate(translation[0], translation[1], translation[2]);
@@ -98,8 +105,6 @@ void ofxAnimatedNodeBase::preDraw()
 	ofRotate(rotation[2], 0, 0, 1);
 	ofRotate(rotation[1], 0, 1, 0);
 	ofRotate(rotation[0], 1, 0, 0);
-	
-
 }
 
 void ofxAnimatedNodeBase::draw()

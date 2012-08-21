@@ -33,6 +33,7 @@ void ofxAnimatorTranslation::set(ofxAnimatorBase::EasingFuncType _easyFuncType, 
 
 void ofxAnimatorTranslation::start()
 {
+	tween->setFrameBasedAnimation(true);
 	tween->setParameters(*easyFunc, static_cast<ofxTween::ofxEasingType>(getOfxEasingType(easyType)), animatedNode->getTranslation()[0], to[0],  (unsigned)(duration*1000), (unsigned)(delay*1000));
 	tween->addValue(animatedNode->getTranslation()[1], to[1]);
 	tween->addValue(animatedNode->getTranslation()[2], to[2]);

@@ -72,7 +72,7 @@ void ofxTween::start(){
 		timestamp = Poco::Timestamp();
 		timestamp += delay;
 	}else{
-		elapsed=0;
+		elapsed=0;		
 	}
 
 }

@@ -47,7 +47,7 @@ private:
 	float scale;
 	bool show;
 
-	std::vector<ofxAnimatorBase*> animators;
+	std::deque<ofxAnimatorBase*> animators;
 };
 
 #endif
