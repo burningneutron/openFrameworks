@@ -361,6 +361,148 @@ void ofxSimpleNI::drawSkeleton(float x, float y, float z)
 	}
 }
 
+int ofxSimpleNI::getPlayerNum()
+{
+	int trackingPlayerNum = 0;
+	XnUserID aUsers[15];
+	XnUInt16 nUsers = 15;
+	g_UserGenerator.GetUsers(aUsers, nUsers);
+	for (int i = 0; i < nUsers; ++i)
+	{
+		if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])){
+			trackingPlayerNum++;
+		}
+	}
+
+	return trackingPlayerNum;
+}
+
+bool ofxSimpleNI::getFirstUserID(int &id)
+{
+	int trackingPlayerNum = 0;
+	XnUserID aUsers[15];
+	XnUInt16 nUsers = 15;
+	g_UserGenerator.GetUsers(aUsers, nUsers);
+	for (int i = 0; i < nUsers; ++i)
+	{
+		if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])){
+			id = (int)aUsers[i];
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool ofxSimpleNI::getNearestUserID(int &id)
+{
+	int trackingPlayerNum = 0;
+	XnUserID aUsers[15];
+	XnUInt16 nUsers = 15;
+	g_UserGenerator.GetUsers(aUsers, nUsers);
+
+	int nearestID = -1;
+	float nearestDist = 100000000.f;
+	for (int i = 0; i < nUsers; ++i)
+	{
+		if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])){
+			id = (int)aUsers[i];
+			
+			float dist;
+			XnSkeletonJointPosition joint;
+			g_UserGenerator.GetSkeletonCap().GetSkeletonJointPosition(aUsers[i], XN_SKEL_RIGHT_HIP, joint);
+
+			if( joint.fConfidence < 0.5 ) continue;
+
+			dist = (float) joint.position.Z;
+
+			if( dist < nearestDist ){
+				nearestDist = dist;
+				nearestID = id;
+			}
+		}
+	}
+	if( nearestID >= 0 ){
+		id = nearestID;
+		return true;
+	}else{
+		return false;
+	}
+}
+
+bool ofxSimpleNI::getMiddleNearestUserID(int &id)
+{
+	int trackingPlayerNum = 0;
+	XnUserID aUsers[15];
+	XnUInt16 nUsers = 15;
+	g_UserGenerator.GetUsers(aUsers, nUsers);
+
+	int nearestID = -1;
+	float nearestDist = 100000000.f;
+	for (int i = 0; i < nUsers; ++i)
+	{
+		if (g_UserGenerator.GetSkeletonCap().IsTracking(aUsers[i])){
+			id = (int)aUsers[i];
+
+			float dist;
+			XnSkeletonJointPosition joint;
+			g_UserGenerator.GetSkeletonCap().GetSkeletonJointPosition(aUsers[i], XN_SKEL_RIGHT_HIP, joint);
+
+			if( joint.fConfidence < 0.5 ) continue;
+
+			XnPoint3D pt;
+			pt = joint.position;
+			g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
+			if( pt.X < 640/4 || pt.X > 640*3/4 ) continue;
+
+			dist = (float) joint.position.Z;
+			cout << "dist : " << dist << endl;
+
+			if( dist < nearestDist ){
+				nearestDist = dist;
+				nearestID = id;
+			}
+		}
+	}
+
+	cout << "nearest ID: " << nearestID << endl;
+
+	if( nearestID >= 0 ){
+		id = nearestID;
+		return true;
+	}else{
+		return false;
+	}
+}
+
+bool ofxSimpleNI::getJointPos2D(int userID, XnSkeletonJoint JOINT, float &x, float &y)
+{	
+	if (!g_UserGenerator.GetSkeletonCap().IsTracking(userID)) return false;
+
+	if (!g_UserGenerator.GetSkeletonCap().IsJointActive(JOINT))
+	{
+		return false;
+	}
+
+	XnSkeletonJointPosition joint;
+	g_UserGenerator.GetSkeletonCap().GetSkeletonJointPosition(userID, JOINT, joint);
+
+	if (joint.fConfidence < 0.5)
+	{
+		return false;
+	}
+
+	XnPoint3D pt;
+	pt = joint.position;
+
+	g_DepthGenerator.ConvertRealWorldToProjective(1, &pt, &pt);
+
+	x = pt.X;
+	y = pt.Y;
+
+	return true;
+}
+
 const XnChar* ofxSimpleNI::GetCalibrationErrorString(XnCalibrationStatus error)
 {
 	switch (error)

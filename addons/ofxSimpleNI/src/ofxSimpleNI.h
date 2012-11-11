@@ -36,6 +36,12 @@ public:
 	void drawRawDepthImg(float x, float y, float z);
 	void drawSkeleton(float x, float y, float z);
 
+	int getPlayerNum();
+	bool getFirstUserID(int &id);
+	bool getNearestUserID(int &id);
+	bool getMiddleNearestUserID(int &id);
+	bool getJointPos2D(int userID, XnSkeletonJoint JOINT, float &x, float &y);
+
 	// callbacks
 	static void XN_CALLBACK_TYPE User_NewUser(xn::UserGenerator& generator, XnUserID nId, void* pCookie);
 	static void XN_CALLBACK_TYPE User_LostUser(xn::UserGenerator& generator, XnUserID nId, void* pCookie);

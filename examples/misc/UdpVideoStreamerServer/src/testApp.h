@@ -1,23 +1,19 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxOsc.h"
+#include "ofxVideoSourceCamera.h"
+#include "ofxVideoStreamerUdp.h"
 
-#define HOST "192.168.0.108"
-#define PORT 12345
-
-//--------------------------------------------------------
-class testApp : public ofBaseApp {
+class testApp : public ofBaseApp{
 
 	public:
-
 		void setup();
 		void update();
 		void draw();
 
-		void keyPressed(int key);
+		void keyPressed  (int key);
 		void keyReleased(int key);
-		void mouseMoved(int x, int y);
+		void mouseMoved(int x, int y );
 		void mouseDragged(int x, int y, int button);
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
@@ -25,8 +21,8 @@ class testApp : public ofBaseApp {
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		ofTrueTypeFont font;
-		ofxOscSender sender;
-
+		ofxVideoSourceCamera camera;
+		ofImage frame;
+		ofxVideoStreamerUdp udpStreamer;
+		
 };
-

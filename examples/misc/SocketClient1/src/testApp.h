@@ -6,6 +6,7 @@
 #include "Poco/Net/SocketStream.h"
 #include "Poco/Net/SocketAddress.h"
 #include "Poco/StreamCopier.h"
+#include "Poco/Net/DatagramSocket.h"
 
 class testApp : public ofBaseApp{
 
@@ -24,5 +25,6 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-		Poco::Net::StreamSocket client;
+		Poco::Net::StreamSocket tcpClient;
+		Poco::Net::DatagramSocket udpClient;
 };

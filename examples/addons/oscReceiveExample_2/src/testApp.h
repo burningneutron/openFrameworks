@@ -3,12 +3,11 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 
-#define HOST "192.168.0.108"
-#define PORT 12345
+// listen on port 12345
+#define PORT 12000
+#define NUM_MSG_STRINGS 20
 
-//--------------------------------------------------------
 class testApp : public ofBaseApp {
-
 	public:
 
 		void setup();
@@ -26,7 +25,12 @@ class testApp : public ofBaseApp {
 		void gotMessage(ofMessage msg);
 
 		ofTrueTypeFont font;
-		ofxOscSender sender;
+		ofxOscReceiver receiver;
 
+		int current_msg_string;
+		string msg_strings[NUM_MSG_STRINGS];
+		float timers[NUM_MSG_STRINGS];
+
+		int mouseX, mouseY;
+		string mouseButtonState;
 };
-
