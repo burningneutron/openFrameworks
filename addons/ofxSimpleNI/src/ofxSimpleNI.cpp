@@ -133,7 +133,7 @@ void ofxSimpleNI::stop()
 void ofxSimpleNI::update()
 {
 	// Read next available data
-	g_Context.WaitAndUpdateAll();
+	g_Context.WaitAnyUpdateAll();
 	//g_Context.WaitOneUpdateAll(g_UserGenerator);
 	//g_DepthGenerator.WaitAndUpdateData();
 

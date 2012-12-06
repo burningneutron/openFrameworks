@@ -1,0 +1,5 @@
+ofxGui
+ofxMultiTouch
+ofxOsc
+ofxSimpleNI
+ofxXmlSettings
